@@ -24,7 +24,7 @@ Route::group(['prefix' => '/'], function () {
 	Route::get('/information', function () { return view('pages.about.information'); });
 	Route::get('/ncd', function () { return view('pages.about.ncd'); });
 	Route::get('/vaccine19', function () { return view('pages.about.vaccine'); });
-	Route::get('/ita','frontController@ita');
+	Route::get('/itah/{year}','frontController@ita');
 	Route::get('/ita/{id}','frontController@ita_sub')->name('ita.sub');
 	Route::get('/news','frontController@news');
 	Route::get('/news/{id}','frontController@show_news');

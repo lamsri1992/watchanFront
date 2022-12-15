@@ -26,16 +26,20 @@ class frontController extends Controller
         return view('index',['news'=>$news,'event'=>$event]);
     }
 
-    public function ita()
+    public function ita($year)
     {
         $ita = DB::table('tb_ita')->get();
-        return view('pages.ita.index',['ita'=>$ita]);
+        return view('pages.ita.index',['ita'=>$ita,'year'=>$year]);
     }
 
     public function ita_sub($id)
-    { 
-        $ita = DB::table('tb_ita')->where('ita_id',$id)->first();
-        $sub = DB::table('tb_ita_sub')->where('sub_group',$id)->get();
+    {
+        $exp = explode("_",$id);
+        $ita = DB::table('tb_ita')->where('ita_id',$exp[0])->first();
+        $sub = DB::table('tb_ita_sub')
+            ->where('sub_group',$exp[0])
+            ->where('sub_year',$exp[1])->get();
+        // dd($ita,$sub,$exp);
         return view('pages.ita.show',['ita'=>$ita,'sub'=>$sub]);
     }
 

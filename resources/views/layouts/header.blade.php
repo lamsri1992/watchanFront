@@ -45,7 +45,7 @@
                     <ul>
                         @foreach ($ita_year as $res)
                         <li>
-                            <a href="{{ url('/ita') }}">ITA ปี {{ $res->y_year }}</a>
+                            <a href="{{ url('/itah/'.$res->y_year) }}">ITA ปี {{ $res->y_year }}</a>
                         </li>
                         @endforeach
                     </ul>

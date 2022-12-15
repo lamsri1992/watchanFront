@@ -11,13 +11,25 @@
         </div>
     </div>
 </section>
-
+@php
+    $url = url()->current();
+    $url_path = parse_url($url, PHP_URL_PATH);
+    $basename = pathinfo($url_path, PATHINFO_BASENAME);
+    $exp = explode("_",$basename);
+@endphp
 <section class="inner-page">
     <div class="container">
         <div class="section-title">
-            <h2 style="font-size: 25px;">{{ $ita->ita_eb }}</h2>
+            <h2 style="font-size: 25px;">
+                {{ $ita->ita_eb }}
+            </h2>
         </div>
         <div class="accordion" id="accordionExample">
+            <div class="text-center">
+                <span class="text-muted">
+                    ปีงบประมาน {{ $exp[1] }}
+                </span>
+            </div>
             <div class="card">
                 @foreach ($sub as $item)                
                 <div class="card-header" id="heading{{ $item->sub_id }}">
