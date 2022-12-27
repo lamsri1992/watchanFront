@@ -115,7 +115,7 @@
         <div class="container">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    @for ($i = 1; $i < 10; $i++)
+                    @for ($i = 1; $i < 3; $i++)
                     <div class="carousel-item {{ ($i == 1) ? 'active' : '' }}">
                         <img src="{{ asset('img/slide/'.$i.'.jpg') }}" class="d-block w-100">
                     </div>
