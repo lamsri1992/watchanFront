@@ -9,14 +9,42 @@ class itaController extends Controller
 {
     public function index()
     {
-        $ita = DB::table('tb_ita')->get();
+        $ita = DB::table('tb_ita_year')->orderBy('y_year','desc')->get();
         return view('backend.ita.index',['ita'=>$ita]);
+    }
+
+    public function year($id)
+    {
+        $ita = DB::table('tb_ita')
+                ->where('ita_year',$id)
+                ->get();
+        return view('backend.ita.year',['ita'=>$ita,'id'=>$id]);
     }
 
     public function show($id)
     {
         $ita = DB::table('tb_ita')->where('ita_id',$id)->first();
-        return view('backend.ita.show',['ita'=>$ita]);
+        $sub = DB::table('tb_ita_sub')
+                ->where('sub_group',$id)
+                ->get();
+        return view('backend.ita.show',['ita'=>$ita,'sub'=>$sub]);
+    }
+
+    public function edit($id)
+    {
+        $ita = DB::table('tb_ita')->where('ita_id',$id)->first();
+        return view('backend.ita.edit',['ita'=>$ita]);
+    }
+
+    public function update(Request $request,$id)
+    {
+        DB::table('tb_ita')->where('ita_id', $id)->update(
+            [ 
+                'ita_eb' => $request->ita_eb, 
+                'ita_year' => $request->ita_year, 
+            ]
+        );
+        return back()->with('success','แก้ไขรายการสำเร็จ : '.$request->get('ita_eb'));
     }
 
     public function status(Request $request)

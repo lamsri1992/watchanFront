@@ -20,60 +20,26 @@
             ระบบจัดการข้อมูล ITA
         </h2>
     </div>
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <table id="tableBasic" class="table table-borderless table-striped">
-                        <thead class="table-dark">
-                            <tr>
-                                <th class="text-center">ID</th>
-                                <th>ชื่อหัวข้อ ITA</th>
-                                <th class="text-center">สถานะ</th>
-                                <th class="text-center"><i class="fa fa-bars"></i></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($ita as $res)
-                            <tr>
-                                <td class="text-center">{{ $res->ita_id }}</td>
-                                <td>{{ $res->ita_eb }}</td>
-                                <td class="text-center">
-                                    <input id="btnToggle" type="checkbox"  data-id="{{ $res->ita_id }}" 
-                                    data-toggle="toggle" data-size="xs" data-onstyle="success" data-on="เปิด" data-off="ปิด" 
-                                    {{ $res->ita_status == 1 ? 'checked' : '' }}>
-                                </td>
-                                <td class="text-center">
-                                    <a href="{{ route('ita.show',$res->ita_id) }}" class="badge bg-secondary">
-                                        <i class="fa fa-folder-open"></i> View
-                                    </a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+    <div class="container">
+        <div class="row">
+            @foreach ($ita as $res)
+            <div class="col-md-3">
+                <div class="card" style="width: 100%;">
+                    <img src="{{ asset('img/ita.jpg') }}" class="card-img-top" alt="MOIT รพ.วัดจันทร์ฯ">
+                    <div class="card-body text-center">
+                        <h5 class="card-title" style="font-weight: bold;">
+                            <a href="{{ route('ita.year',$res->y_year) }}">
+                                {{ "ปีงบประมาน ".$res->y_year }}
+                            </a>
+                        </h5>
+                    </div>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </section>
 @endsection
 @section('script')
-<script>
-    $(function() {
-        $("#tableBasic").on("change", "#btnToggle", function() {
-            var status = $(this).prop('checked') == true ? 1 : 0; 
-            var id = $(this).data('id'); 
-            
-            $.ajax({
-                type: "GET",
-                url: '/backend/ita/status',
-                data: {'status': status, 'id': id},
-                success: function(data){
-                    // console.log('update complete')
-                }
-            });
-        })
-    })
-</script>
+
 @endsection

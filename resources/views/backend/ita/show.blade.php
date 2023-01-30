@@ -7,7 +7,8 @@
             <ol>
                 <li><a href="#">ระบบหลังบ้าน</a></li>
                 <li><a href="{{ url('home') }}">เมนูผู้ดูแลระบบ</a></li>
-                <li><a href="{{ url('backend/ita') }}">ระบบจัดการข้อมูล ITA</a></li>
+                <li><a href="{{ route('ita.home') }}">ระบบจัดการข้อมูล ITA</a></li>
+                <li><a href="{{ route('ita.year',$ita->ita_year) }}">{{ "MOIT - ITA ปีงบประมาน ".$ita->ita_year }}</a></li>
             </ol>
         </div>
     </div>
@@ -25,26 +26,8 @@
             <div class="card-body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-8">
-                            <select id="year" name="year" class="form-select">
-                                <option>เลือกข้อมูลตามปีงบประมาน</option>
-                                @foreach ($ita_year as $res)
-                                <option value="{{ $res->y_year }}">
-                                    {{ "• ปีงบประมาน ".$res->y_year }}
-                                </option>
-                                @endforeach
-                            </select>
-                            <input id="ita_id" type="text" value="{{ $ita->ita_id }}" hidden>
-                        </div>
-                        <div class="col-md-2">
-                            <button id="btn" type="button" class="btn btn-primary" style="width: 100%;">
-                                <i class="fa fa-search"></i>
-                                ค้นหาข้อมูล
-                            </button>
-                        </div>
-                        <div class="col-md-2">
-                            <a href="#" class="btn btn-success" style="width: 100%;"
-                                data-toggle="modal" data-target="#add">
+                        <div class="col-md-12">
+                            <a href="#" class="btn btn-success" data-toggle="modal" data-target="#add">
                                 <i class="fa fa-plus-circle"></i>
                                 เพิ่มหัวข้อย่อย
                             </a>
@@ -55,7 +38,33 @@
             <div class="card-body">
                 <div class="container">
                     <div class="col-md-12">
-                        <table id="list" class="table table-hover table-borderless table-sm align-middle"></table>
+                        <table id="list" class="table table-hover table-borderless table-sm align-middle">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" width="10%">ปีงบประมาน</th>
+                                    <th class="">หัวข้อย่อย</th>
+                                    <th colspan="2"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($sub as $res)
+                                <tr>
+                                    <td class="text-center">{{ $res->sub_year }}</td>
+                                    <td class="">{{ $res->sub_title }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ route('ita.sub_edit',$res->sub_id) }}" class="badge bg-danger">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="{{ route('ita.sub_show',$res->sub_id) }}" class="badge bg-secondary">
+                                            <i class="fa fa-folder-open"></i> View
+                                        </a>
+                                    </td>
+                                <tr>
+                                @endforeach
+                            <tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -81,7 +90,7 @@
                     </div>
                     <div class="form-group" style="margin-bottom: 1rem;">
                         <label for="">ปีงบประมาน</label>
-                        <input type="text" name="sub_year" class="form-control" placeholder="ระบุปีงบประมาน">
+                        <input type="text" name="sub_year" class="form-control" value="{{ $ita->ita_year }}" readonly>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -28,7 +28,10 @@ class frontController extends Controller
 
     public function ita($year)
     {
-        $ita = DB::table('tb_ita')->get();
+        $ita = DB::table('tb_ita')
+                ->where('ita_year',$year)
+                ->where('ita_status',1)
+                ->get();
         return view('pages.ita.index',['ita'=>$ita,'year'=>$year]);
     }
 

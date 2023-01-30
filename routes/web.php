@@ -54,8 +54,12 @@ Route::group(['prefix' => 'backend/users'], function () {
 });
 
 Route::group(['prefix' => 'backend/ita'], function () {
-    Route::get('/','itaController@index');
+    Route::get('/','itaController@index')->name('ita.home');
+	Route::get('/status', 'itaController@status');
+    Route::get('/year/{id}','itaController@year')->name('ita.year');
     Route::get('/{id}','itaController@show')->name('ita.show');
+    Route::get('/edit/{id}','itaController@edit')->name('ita.edit');
+    Route::get('/update/{id}','itaController@update')->name('ita.update');
     Route::get('/sub/{id}','itaController@sub_show')->name('ita.sub_show');
     Route::get('/sub/data/{id}','itaController@data_show')->name('ita.data_show');
     Route::post('/sub_add','itaController@sub_add')->name('ita.sub_add');
@@ -66,7 +70,6 @@ Route::group(['prefix' => 'backend/ita'], function () {
     Route::get('/sub/data/{id}','itaController@data_edit')->name('ita.data_edit');
 	Route::post('/sub/data/fileDelete','itaController@data_f_delete')->name('ita.data_f_delete');
 	Route::post('/sub/data/update/{id}','itaController@data_update')->name('ita.data_update');
-	Route::get('/status', 'itaController@status');
 });
 
 Auth::routes();
