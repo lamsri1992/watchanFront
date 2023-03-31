@@ -8,7 +8,7 @@
                 <li><a href="#">ระบบหลังบ้าน</a></li>
                 <li><a href="{{ url('home') }}">เมนูผู้ดูแลระบบ</a></li>
                 <li><a href="{{ url('backend/ita') }}">ระบบจัดการข้อมูล ITA</a></li>
-                <li><a href="{{ url('backend/ita/sub/',$data->sub_id) }}">{{ $data->data_title }}</a></li>
+                <li><a href="{{ url('backend/ita/sub',$data->sub_id) }}">{{ $data->data_title }}</a></li>
             </ol>
         </div>
     </div>
@@ -103,6 +103,10 @@
                                     <i class="fa fa-times"></i>
                                 </a>
                                 @endif
+                            </div>
+                            <div class="form-group" style="margin-bottom: 1rem;">
+                                <label for="">URL</label>
+                                <input type="text" name="data_url" class="form-control" value="{{ $data->data_url }}">
                             </div>
                         </div>
                         <div class="modal-footer">

@@ -64,6 +64,7 @@
                 var container = document.querySelector(conid);
                     var ul = document.createElement('ul');
                     Array.from(data).forEach(element => {
+                       if (element.data_file) {
                         var li = document.createElement('li');
                         const anchor = document.createElement('a');
                         var file = '/files/ita/'+ element.sub_year +'/moit'+ element.sub_group +'/'+ element.data_file;
@@ -72,6 +73,16 @@
                             anchor.innerText = element.data_title;
                         li.appendChild(anchor);
                         ul.appendChild(li);
+                       } else {
+                        var li = document.createElement('li');
+                        const anchor = document.createElement('a');
+                        var file = element.data_url;
+                            anchor.href = file;
+                            anchor.target = "_blank";
+                            anchor.innerText = element.data_title;
+                        li.appendChild(anchor);
+                        ul.appendChild(li);
+                       }
                     });
                 container.appendChild(ul);
             },

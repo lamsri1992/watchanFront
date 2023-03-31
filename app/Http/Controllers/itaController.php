@@ -124,6 +124,7 @@ class itaController extends Controller
                 "ita_sub_id" => $request->get('ita_sub_id'),
                 "data_title" => $request->get('data_title'),
                 "data_file" => $fileName,
+                "data_url" => $request->get('data_url'),
             ]
         );
         return back()->with('success','เพิ่มรายการสำเร็จ : '.$request->get('data_title'));
@@ -171,6 +172,7 @@ class itaController extends Controller
             DB::table('tb_ita_data')->where('data_id',$id)->update([
                 "ita_sub_id" => $request->get('ita_sub_id'),
                 "data_title" => $request->get('data_title'),
+                "data_url" => $request->get('data_url'),
             ]);
         }
         return back()->with('success','แก้ไขรายการข้อมูลสำเร็จ : '.$request->get('data_title'));

@@ -53,11 +53,18 @@
                                 <td class="text-center">{{ $res->data_id }}</td>
                                 <td>{{ $res->data_title }}</td>
                                 <td>
+                                    @if (isset($res->data_file))
                                     <a href="{{ asset('files/ita/'.$sub->sub_year.'/moit'.$sub->ita_id.'/'.$res->data_file) }}" target="_blank">
                                         <i class="far fa-file-pdf text-danger"></i>
                                         {{ $res->data_file }}
                                     </a>
-                                </td>
+                                    @endif
+                                    @if (isset($res->data_url))
+                                    <a href="{{ $res->data_url }}" target="_blank">
+                                        <i class="fas fa-link text-info"></i>
+                                        {{ $res->data_url }}
+                                    </a>
+                                    @endif
                                 <td>{{ DateThai($res->created_at) }}</td>
                                 <td class="text-center">
                                     <input id="btnToggle" type="checkbox"  data-id="{{ $res->data_id }}" 
@@ -101,6 +108,10 @@
                         <label for="">ไฟล์แนบ</label>
                         <input type="file" name="data_file" class="form-control-file">
                     </div>
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label for="">URL</label>
+                        <input type="text" name="data_url" class="form-control" placeholder="หากมีไฟล์แนบ ไม่ต้องใส่ช่องนี้">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-success"
@@ -115,7 +126,7 @@
                             if (result.isConfirmed) {
                                 form.submit();
                                 Swal.fire({
-                                    title: 'กำลังอัพโหลดไฟล์',
+                                    title: 'กำลังสร้างรายการ',
                                     timerProgressBar: true,
                                     didOpen: () => {
                                         Swal.showLoading()
