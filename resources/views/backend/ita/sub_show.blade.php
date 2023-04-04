@@ -62,7 +62,7 @@
                                     @if (isset($res->data_url))
                                     <a href="{{ $res->data_url }}" target="_blank">
                                         <i class="fas fa-link text-info"></i>
-                                        {{ $res->data_url }}
+                                        คลิกเพื่อดูตัวอย่าง
                                     </a>
                                     @endif
                                 <td>{{ DateThai($res->created_at) }}</td>
